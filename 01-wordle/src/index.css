@@ -6,7 +6,7 @@ body{
 }
 
 .container-main {
-  width: 45vh;
+  width: 60vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
