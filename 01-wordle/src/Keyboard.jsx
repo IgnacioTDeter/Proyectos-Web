@@ -1,6 +1,9 @@
 
 
-export function LetterKeyboard(){
+export function LetterKeyboard({ letterValue }) {
 
-    <div className="button-letter"> </div>
+    return (
+        <div className="button-letter"> {letterValue} </div>
+    )
+
 }
