@@ -1,6 +1,15 @@
+import React,{ useContext } from "react";
+import { AppContext } from "./App";
 
-export function Letter({ letterPosition, attemptVal }){
+
+export function Letter({ letterPos, attemptVal }){
+    
+    const { board } = useContext(AppContext) 
+    const letter = board[attemptVal][letterPos]
     return(
-        <input className="wd-input-cell" type="text" maxLength="1" readOnly />
+        <div className="wd-input-cell">
+            {letter} 
+        </div>
+        
     )
 }
