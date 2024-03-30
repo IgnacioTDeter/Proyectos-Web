@@ -2,72 +2,49 @@
 import { Board } from './Board.jsx';
 import { LetterKeyboard } from './Keyboard.jsx';
 import './App.css';
-import { createContext, useState } from 'react';
+import { createContext, useState, useTransition } from 'react';
 import { BoardDefault } from "./Words.jsx";
-
 export const AppContext = createContext();
 
 export function App() {
-
-
   const [board, setBoard] = useState(BoardDefault);
+  const [currAttempt, setCurrAttempt] = useState({attempt: 0, letterPos: 0})
+
+  const onSelectLetter = (keyVal) =>{
+    if(currAttempt.letterPos > 4) return;
+
+    const newBoard = [...board];
+    newBoard[currAttempt.attempt][currAttempt.letterPos] = keyVal;
+    setBoard(newBoard);
+    setCurrAttempt({...currAttempt, letterPos: currAttempt.letterPos + 1})
+  }
+  
+  const onDelete = () =>{
+    if(currAttempt.letterPos === 0) return;
+    const newBoard = [...board];
+    newBoard[currAttempt.attempt][currAttempt.letterPos - 1] = "";
+    setBoard(newBoard);
+    setCurrAttempt({...currAttempt, letterPos: currAttempt.letterPos - 1})
+  }
+
+  const onEnter = () =>{
+    if( currAttempt.letterPos !== 5) return;
+    setCurrAttempt({attempt: currAttempt.attempt + 1, letterPos: 0})
+  }
 
   return (
-
     <main className='container-main'>
       <h1 className='wd-title'> Bienvenido a Wordle </h1>
       <span className='wd-title-span'> Descubre la palabra escondida </span>
 
-      <AppContext.Provider value={{ board, setBoard }}>
-
+      <AppContext.Provider value={{ board, setBoard, currAttempt, setCurrAttempt, onDelete, onSelectLetter, onEnter }}>
         <Board />
-
-
-        <article className='wd-keyboard-container'>
-          <div className="row" >
-            <LetterKeyboard letterValue="Q" />
-            <LetterKeyboard letterValue="W" />
-            <LetterKeyboard letterValue="E" />
-            <LetterKeyboard letterValue="R" />
-            <LetterKeyboard letterValue="T" />
-            <LetterKeyboard letterValue="Y" />
-            <LetterKeyboard letterValue="U" />
-            <LetterKeyboard letterValue="I" />
-            <LetterKeyboard letterValue="O" />
-            <LetterKeyboard letterValue="P" />
-          </div>
-          <div className="row">
-            <LetterKeyboard letterValue="A" />
-            <LetterKeyboard letterValue="S" />
-            <LetterKeyboard letterValue="D" />
-            <LetterKeyboard letterValue="F" />
-            <LetterKeyboard letterValue="G" />
-            <LetterKeyboard letterValue="H" />
-            <LetterKeyboard letterValue="J" />
-            <LetterKeyboard letterValue="K" />
-            <LetterKeyboard letterValue="L" />
-            <LetterKeyboard letterValue="Ñ" />
-          </div>
-
-          <div className="row">
-            <div className="button-letter special-letter">Enter</div>
-            <LetterKeyboard letterValue="Z" />
-            <LetterKeyboard letterValue="X" />
-            <LetterKeyboard letterValue="C" />
-            <LetterKeyboard letterValue="V" />
-            <LetterKeyboard letterValue="B" />
-            <LetterKeyboard letterValue="N" />
-            <LetterKeyboard letterValue="M" />
-            <div className="button-letter special-letter">Borrar</div>
-          </div>
-        </article>
-
+        <LetterKeyboard />
       </AppContext.Provider>
-
     </main>
-
-
   )
 }
+
+
 
 
