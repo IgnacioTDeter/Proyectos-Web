@@ -7,7 +7,7 @@ export function Key({ keyVal, bigKey }) {
         onDelete,
         onEnter,
         onSelectLetter
-    } = useContext(AppContext)
+    } = useContext(AppContext) //Está extrayendo los valores onDelete, onEnter y onSelectLetter del contexto AppContext
 
     const selectLetter = () => {
 
