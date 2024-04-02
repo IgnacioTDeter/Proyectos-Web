@@ -1,4 +1,4 @@
-import {Key} from './Key'
+import  Key  from './Key'
 import React, {useCallback, useEffect, useContext} from 'react';
 import { AppContext } from "./App"
 
@@ -16,24 +16,25 @@ export function LetterKeyboard({ letterValue }) {
     const handleKeyboard = useCallback(
         (event) =>{ 
         if(event.key === "Enter"){
-            onEnter();
+            onEnter(); 
+            
         }
         else if (event.key === "Backspace"){
             onDelete();
         }
         else{
             keys1.forEach((key) =>{
-                if(event.key === key){
+                if(event.key.toLowerCase() === key.toLowerCase()){
                     onSelectLetter(key)
                 }
             })
             keys2.forEach((key) =>{
-                if(event.key === key){
+                if(event.key.toLowerCase() === key.toLowerCase()){
                     onSelectLetter(key)
                 }
             })
             keys3.forEach((key) =>{
-                if(event.key === key){
+                if(event.key.toLowerCase() === key.toLowerCase()){
                     onSelectLetter(key)
                 }
             })
@@ -47,6 +48,9 @@ export function LetterKeyboard({ letterValue }) {
             document.removeEventListener("keydown", handleKeyboard)
         }
     }, [handleKeyboard])
+
+
+    /* GENERA EL TECLADO */
 
     return (
         /* <div className="button-letter"> {letterValue} </div>*/
