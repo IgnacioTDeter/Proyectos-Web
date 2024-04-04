@@ -1,5 +1,5 @@
 import { AppContext } from "./App";
-import { GuessWord } from "./Words";
+
 import React, { useContext } from "react";
 
 export default function Key({ keyVal, bigKey }) {
@@ -16,7 +16,6 @@ export default function Key({ keyVal, bigKey }) {
 
         if (keyVal === "ENTER") {
             onEnter();
-            GuessWord();
         }
         else if (keyVal === "DELETE") {
             onDelete();

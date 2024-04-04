@@ -17,7 +17,6 @@ export function LetterKeyboard({ letterValue }) {
         (event) =>{ 
         if(event.key === "Enter"){
             onEnter(); 
-            
         }
         else if (event.key === "Backspace"){
             onDelete();
