@@ -52,7 +52,6 @@
 
 .wd-keyboard-container{
     width: 100%;
-    
 }
 
 
@@ -99,11 +98,15 @@
 
 
 @media (max-width: 600px) {
-    .wd-keyboard-container{
-        width: 98%;
-    }
+
     .row{
         margin-top: 10px;
+    }
+
+}
+@media (max-width: 1020px){
+    .wd-container-GTL{
+        width: 90%;
     }
 }
 

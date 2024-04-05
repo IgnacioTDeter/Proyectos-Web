@@ -13,7 +13,7 @@ export function FinalBoard({ gameValue, finalWord }) {
                     
                     {finalWord} 
                     </p>
-                    <button>
+                    <button onClick={() => window.location.reload()}>
                         Jugar de nuevo
                     </button>
                 </article>
@@ -31,7 +31,7 @@ export function FinalBoard({ gameValue, finalWord }) {
                     
                     {finalWord} 
                     </p>
-                    <button>
+                    <button onClick={() => window.location.reload()}>
                         Jugar de nuevo
                     </button>
                 </article>

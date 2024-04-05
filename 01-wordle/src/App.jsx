@@ -5,6 +5,7 @@ import './App.css';
 import React, { createContext, useState, useContext, useEffect } from 'react';
 import { BoardDefault } from "./Words.jsx";
 import { FinalBoard } from "./finalBoard";
+import Confetti from 'react-confetti'
 
 
 export const AppContext = createContext();
@@ -47,6 +48,7 @@ export function App() {
 
     if (palabra === finalWord) {
       setCurrAttempt({ attempt: currAttempt.attempt + 1, letterPos: 0, gameOver: 1 })
+      confetti()
 
     }
     else if (palabra !== finalWord && currAttempt.attempt === 4) {
@@ -60,26 +62,34 @@ export function App() {
 
   }
 
+
+
   return (
 
     <body>
 
       {
-        currAttempt.gameOver > 0 ? <FinalBoard gameValue={currAttempt.gameOver}  finalWord={finalWord}/>
+        currAttempt.gameOver > 0 ? <FinalBoard gameValue={currAttempt.gameOver} finalWord={finalWord} />
           : null
+      }
+      {
+        currAttempt.gameOver === 1 ? <Confetti/> : null
       }
       <main className='container-main'>
 
-        <h1 className='wd-title'> Bienvenido a Wordle </h1>
-        <span className='wd-title-span'> Descubre la palabra escondida </span>
+        <div className="general-container">
+          <h1 className='wd-title'> Bienvenido a Wordle </h1>
+          <span className='wd-title-span'> Descubre la palabra escondida </span>
 
-        <AppContext.Provider value={{ board, setBoard, currAttempt, setCurrAttempt, onDelete, onSelectLetter, onEnter, finalWord }}> {/* 
+          <AppContext.Provider value={{ board, setBoard, currAttempt, setCurrAttempt, onDelete, onSelectLetter, onEnter, finalWord }}> {/* 
      Se pasa el estado de board. El estado de currAttempt y las funciones basicas del wordle (eliminar, enter y seleccionar letra)
      */}
 
-          <Board />
-          <LetterKeyboard />
-        </AppContext.Provider>
+            <Board />
+            <LetterKeyboard />
+          </AppContext.Provider>
+        </div>
+
       </main>
     </body>
 
