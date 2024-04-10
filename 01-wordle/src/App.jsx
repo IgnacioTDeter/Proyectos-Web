@@ -6,16 +6,21 @@ import React, { createContext, useState, useContext, useEffect } from 'react';
 import { BoardDefault } from "./Words.jsx";
 import { FinalBoard } from "./finalBoard";
 import Confetti from 'react-confetti'
+import { generate, count } from "random-words";
 
 
 export const AppContext = createContext();
+
+  var randomWord = generate({ exactly: 1, minLength:5, maxLength: 5, formatter: (word) => word.toUpperCase() });
+  const finalWord = randomWord.toString()
+  console.log(finalWord)
 
 export function App() {
   const [board, setBoard] = useState(BoardDefault); //board = BoardDefault. 
   const [currAttempt, setCurrAttempt] = useState({ attempt: 0, letterPos: 0, gameOver: 0 }) //Objeto currAttempt
 
-  const finalWord = "CAUSA";
-
+  
+  
   /* ESTE CODIGO FUNCIONA PARA SABER EL ESTADO DE CURRATTEMPT 
   useEffect(() => {
     console.log(currAttempt);
